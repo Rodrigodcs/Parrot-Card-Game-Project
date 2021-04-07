@@ -22,15 +22,19 @@ function shuffleArray(array){
 }
 
 function createTable(array){
-  
+  let table= document.querySelector(".table");
+  for(let i=0;i<array.length;i++){
+    table.innerHTML += `<li><img src="gifs/${array[i]}.gif"></li>`
+  }
 }
 
 //console.log(Math.floor(Math.random()*10)); // random inteiro de 0 a 9
 
-// let number = 0;
-// let cardsArray = [];
-// let shuffledArray = [];
-// numberOfCards();
-// createArray(number);
-// shuffleArray(cardsArray);
-// console.log(shuffledArray);
+let number = 0;
+let cardsArray = [];
+let shuffledArray = [];
+numberOfCards();
+createArray(number);
+shuffleArray(cardsArray);
+console.log(shuffledArray);
+createTable(shuffledArray);
