@@ -1,8 +1,8 @@
 //console.log(Math.floor(Math.random()*10)); // random inteiro de 0 a 9
 
 //Clock
-let sec=7;
-let min=4;
+let sec=0;
+let min=0;
 
 function clock(){
   sec++;
@@ -19,9 +19,6 @@ function clock(){
     document.querySelector(".seconds").innerHTML=`0${sec}`;
   }else{
     document.querySelector(".seconds").innerHTML=sec;
-  }
-  if(sec===10){
-    clearInterval(setInterval(clock,1000));
   }
 }
 setInterval(clock,1000)
@@ -58,12 +55,10 @@ function shuffleArray(array){
 
 function createTable(array){
   let table= document.querySelector(".table");
-  table.innerHTML = `oi`;
   for(let i=0;i<array.length;i++){
     table.innerHTML += `
     <li class="card-container">
       <div class="card" onclick="flip(this)">
-        <span>${array[i]}</span>
         <div class="card-front"><img src="gifs/${array[i]}.gif"></div>
         <div class="card-back"><img src="images/front.png" alt="parrot"></div>
       </div>
@@ -72,7 +67,10 @@ function createTable(array){
 }
 
 function flip(card){
-  console.log("a")
+  if(wait){
+    return;
+  }
+  current = card;
   if(document.querySelector(".flipped") !== null){
     previous = document.querySelector(".flipped");
     flag=true;
@@ -102,10 +100,9 @@ function flip(card){
         }
       }
     }else{
-      previous.classList.remove("flipped")
-      card.classList.remove("flipped")
-      card.classList.remove("block")
-      previous.classList.remove("block")
+      wait=true;
+      setTimeout(vai,2000);
+      
     }
     flag=false;
   }
@@ -113,9 +110,17 @@ function flip(card){
 function reset(){
   
 }
-
+function vai(){
+  wait=false;
+  previous.classList.remove("flipped")
+  current.classList.remove("flipped")
+  current.classList.remove("block")
+  previous.classList.remove("block")
+}
+let wait=false;
 let moves = 0;
 let previous = 0;
+let current = 0;
 let flag = false;
 let number = 6;
 let remainingPairs=0;
