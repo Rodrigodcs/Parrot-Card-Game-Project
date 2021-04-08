@@ -1,9 +1,14 @@
 //console.log(Math.floor(Math.random()*10)); // random inteiro de 0 a 9
 
+
+
+
+
 function numberOfCards(){
   while((number<4 || number>14) || number%2!=0){
     number=parseInt(prompt("Com quantas cartas quer jogar? (4 à 14)"));
   }
+  createArray(number);
 }
 
 function createArray(size){
@@ -12,6 +17,7 @@ function createArray(size){
     cardsArray.push(i);
     cardsArray.push(i);
   }
+  shuffleArray(cardsArray);
 }
 
 function shuffleArray(array){
@@ -22,10 +28,12 @@ function shuffleArray(array){
     array[j]=temp;
   }
   shuffledArray=array;
+  createTable(shuffledArray);
 }
 
 function createTable(array){
   let table= document.querySelector(".table");
+  table.innerHTML = `oi`;
   for(let i=0;i<array.length;i++){
     table.innerHTML += `
     <li class="card-container">
@@ -37,6 +45,7 @@ function createTable(array){
     </li>`;
   }
 }
+
 function flip(card){
   console.log("a")
   if(document.querySelector(".flipped") !== null){
@@ -47,38 +56,49 @@ function flip(card){
     card.classList.remove("flipped");
   }else{
     card.classList.add("flipped");
-    //card.onclick=null;
+    card.classList.add("block");
+    moves++;
   }
   if(flag){
     if(previous.innerHTML==card.innerHTML){
       previous.classList.remove("flipped")
       card.classList.remove("flipped")
       previous.classList.add("done");
+      previous.classList.add("block");
       card.classList.add("done");
-      //card.onclick=null;
-      //previous.onclick=null;
+      card.classList.add("block");
       remainingPairs--;
+
       if(remainingPairs==0){
-        alert("Congrats")
+        alert("Completed in "+moves+" moves!!");
+        if(prompt("restart?")=="sim"){
+          //reset();
+          numberOfCards();
+        }
       }
     }else{
-      //sleep(2000);
       previous.classList.remove("flipped")
       card.classList.remove("flipped")
-      //card.onclick= "flip(this)"
-      //card.setAttribute("onclick",flip(this));
+      card.classList.remove("block")
+      previous.classList.remove("block")
     }
     flag=false;
   }
 }
+function reset(){
+  
+}
+
+let moves = 0;
 let previous = 0;
 let flag = false;
-let number = 10;
+let number = 6;
 let remainingPairs=0;
 let cardsArray = [];
 let shuffledArray = [];
 numberOfCards();
-createArray(number);
-shuffleArray(cardsArray);
-console.log(shuffledArray);
-createTable(shuffledArray);
+
+//createArray(number);
+//shuffleArray(cardsArray);
+//console.log(shuffledArray);
+//createTable(shuffledArray);
