@@ -7,6 +7,7 @@ function numberOfCards(){
 }
 
 function createArray(size){
+  remainingPairs = size/2;
   for(let i=0;i<size/2;i++){
     cardsArray.push(i);
     cardsArray.push(i);
@@ -28,21 +29,52 @@ function createTable(array){
   for(let i=0;i<array.length;i++){
     table.innerHTML += `
     <li class="card-container">
-      <div class="card" onclick="girar(this)">
+      <div class="card" onclick="flip(this)">
+        <span>${array[i]}</span>
         <div class="card-front"><img src="gifs/${array[i]}.gif"></div>
         <div class="card-back"><img src="images/front.png" alt="parrot"></div>
       </div>
-    </li>`
-    
-    //table.innerHTML += `<li><img src="gifs/${array[i]}.gif"></li>`
+    </li>`;
   }
 }
-function girar(carta){
-  carta.classList.toggle("flipped");
+function flip(card){
+  console.log("a")
+  if(document.querySelector(".flipped") !== null){
+    previous = document.querySelector(".flipped");
+    flag=true;
+  }
+  if(card.classList.contains("flipped")){
+    card.classList.remove("flipped");
+  }else{
+    card.classList.add("flipped");
+    //card.onclick=null;
+  }
+  if(flag){
+    if(previous.innerHTML==card.innerHTML){
+      previous.classList.remove("flipped")
+      card.classList.remove("flipped")
+      previous.classList.add("done");
+      card.classList.add("done");
+      //card.onclick=null;
+      //previous.onclick=null;
+      remainingPairs--;
+      if(remainingPairs==0){
+        alert("Congrats")
+      }
+    }else{
+      //sleep(2000);
+      previous.classList.remove("flipped")
+      card.classList.remove("flipped")
+      //card.onclick= "flip(this)"
+      //card.setAttribute("onclick",flip(this));
+    }
+    flag=false;
+  }
 }
-
-
-let number = 0;
+let previous = 0;
+let flag = false;
+let number = 10;
+let remainingPairs=0;
 let cardsArray = [];
 let shuffledArray = [];
 numberOfCards();
