@@ -1,5 +1,30 @@
 //console.log(Math.floor(Math.random()*10)); // random inteiro de 0 a 9
 
+//Clock
+let sec=7;
+let min=4;
+
+function clock(){
+  sec++;
+  if(sec==60){
+    min++;
+    sec=0;
+  }
+  if(min<10){
+    document.querySelector(".minutes").innerHTML=`0${min}`;
+  }else{
+    document.querySelector(".minutes").innerHTML=min;
+  }
+  if(sec<10){
+    document.querySelector(".seconds").innerHTML=`0${sec}`;
+  }else{
+    document.querySelector(".seconds").innerHTML=sec;
+  }
+  if(sec===10){
+    clearInterval(setInterval(clock,1000));
+  }
+}
+setInterval(clock,1000)
 
 
 
