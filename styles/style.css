@@ -21,6 +21,8 @@ ul {
   justify-content: space-around;
 }
 .table {
+  margin: 0 auto;
+  max-width: 560px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -110,6 +112,15 @@ span {
   text-align: left;
   width: 45%;
   height: 100%;
+}
+.size-1 {
+  max-width: 830px;
+}
+.size-2 {
+  max-width: 690px;
+}
+.size-3 {
+  max-width: 970px;
 }
 
 @media (max-width: 614px) {
