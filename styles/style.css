@@ -20,6 +20,12 @@ ul {
   flex-wrap: wrap;
   justify-content: space-around;
 }
+.table {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+}
 .card-container {
   margin: 10px;
   width: 117px;
@@ -65,6 +71,7 @@ ul {
 img {
   width: 100px;
   height: 100px;
+  pointer-events: none;
 }
 .done {
   transform: rotateY(180deg);

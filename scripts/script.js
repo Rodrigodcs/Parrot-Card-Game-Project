@@ -1,11 +1,22 @@
-//console.log(Math.floor(Math.random()*10)); // random inteiro de 0 a 9
-
-//Clock
 let sec=0;
 let min=0;
+let wait=false;
+let moves = 0;
+let previous = 0;
+let current = 0;
+let flag = false;
+let number = 0;
+let remainingPairs=0;
+let cardsArray = [];
+let shuffledArray = [];
+let ended= false;
+
+numberOfCards();
 
 function clock(){
-  sec++;
+  if(ended===false){
+    sec++;
+  }
   if(sec==60){
     min++;
     sec=0;
@@ -22,9 +33,6 @@ function clock(){
   }
 }
 setInterval(clock,1000)
-
-
-
 
 function numberOfCards(){
   while((number<4 || number>14) || number%2!=0){
@@ -93,42 +101,44 @@ function flip(card){
       remainingPairs--;
 
       if(remainingPairs==0){
-        alert("Completed in "+moves+" moves!!");
-        if(prompt("restart?")=="sim"){
-          //reset();
-          numberOfCards();
-        }
+        clearInterval(clock)
+        wait=true;
+        ended=true;
+        setTimeout(finish,200);
       }
     }else{
       wait=true;
-      setTimeout(vai,2000);
-      
+      setTimeout(waiting,1000);
     }
     flag=false;
   }
 }
 function reset(){
-  
+  document.querySelector(".table").innerHTML=``;
+  wait=false;
+  ended=false;
+  moves = 0;
+  previous = 0;
+  current = 0;
+  flag = false;
+  number = 0;
+  remainingPairs=0;
+  cardsArray = [];
+  shuffledArray = [];
+  sec=0;
+  min=0;
+  numberOfCards();
 }
-function vai(){
+function finish(){
+  alert("Completed with "+moves+" moves in "+min+" minutes and "+sec+" seconds!");
+  if(prompt("restart?")=="sim"){
+    reset();
+  }
+}
+function waiting(){
   wait=false;
   previous.classList.remove("flipped")
   current.classList.remove("flipped")
   current.classList.remove("block")
   previous.classList.remove("block")
 }
-let wait=false;
-let moves = 0;
-let previous = 0;
-let current = 0;
-let flag = false;
-let number = 6;
-let remainingPairs=0;
-let cardsArray = [];
-let shuffledArray = [];
-numberOfCards();
-
-//createArray(number);
-//shuffleArray(cardsArray);
-//console.log(shuffledArray);
-//createTable(shuffledArray);
