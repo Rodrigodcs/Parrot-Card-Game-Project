@@ -71,7 +71,7 @@ function flip(card){
   if(document.querySelector(".flipped") !== null){
     previous = document.querySelector(".flipped");
     waitingSecondCard=true;
-  }
+  } 
   if(card.classList.contains("flipped")){
     card.classList.remove("flipped");
   }else{
